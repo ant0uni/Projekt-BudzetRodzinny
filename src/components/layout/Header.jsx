@@ -2,11 +2,13 @@ import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
 
 const Header = () => {
+  const { t } = useBudget();
+
   return (
     <header className="header glass-morphism">
       <div className="search-bar">
         <Search size={18} className="search-icon" />
-        <input type="text" placeholder="Search transactions..." />
+        <input type="text" placeholder={`${t('dashboard')}...`} />
       </div>
       
       <div className="header-actions">

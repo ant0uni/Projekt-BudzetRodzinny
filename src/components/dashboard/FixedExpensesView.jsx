@@ -3,15 +3,15 @@ import { useBudget } from '../../context/BudgetContext';
 import { RefreshCw, Calendar, ArrowRight, User } from 'lucide-react';
 
 const FixedExpensesView = () => {
-  const { transactions } = useBudget();
+  const { transactions, t } = useBudget();
   const fixedItems = transactions.filter(t => t.isFixed);
 
   return (
     <div className="fixed-expenses-view fade-in">
       <div className="content-header">
         <div>
-          <h1>Fixed Expenses</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Manage your recurring monthly commitments.</p>
+          <h1>{t('fixedExpenses')}</h1>
+          <p style={{ color: 'var(--text-muted)' }}>{t('recurringSubtitle')}</p>
         </div>
       </div>
 
@@ -22,11 +22,11 @@ const FixedExpensesView = () => {
               <div className="fixed-icon">
                 <RefreshCw size={24} className="spinning-icon" />
               </div>
-              <span className={`type-tag ${item.type}`}>{item.type}</span>
+              <span className={`type-tag ${item.type}`}>{t(item.type)}</span>
             </div>
             
             <div className="fixed-card-body">
-              <h3>{item.category}</h3>
+              <h3>{t(item.category.toLowerCase())}</h3>
               <p className="fixed-amount">{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(item.amount)}</p>
             </div>
             

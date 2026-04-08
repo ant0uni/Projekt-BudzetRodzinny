@@ -1,4 +1,5 @@
 import React from 'react';
+import { useBudget } from '../../context/BudgetContext';
 import { 
   LayoutDashboard, 
   Wallet, 
@@ -11,13 +12,14 @@ import {
 } from 'lucide-react';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
+  const { t } = useBudget();
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'income', label: 'Income', icon: TrendingUp },
-    { id: 'expenses', label: 'Expenses', icon: TrendingDown },
-    { id: 'savings', label: 'Savings', icon: PiggyBank },
-    { id: 'stats', label: 'Statistics', icon: BarChart3 },
-    { id: 'family', label: 'Family', icon: Users },
+    { id: 'dashboard', label: t('dashboard'), icon: LayoutDashboard },
+    { id: 'income', label: t('income'), icon: TrendingUp },
+    { id: 'expenses', label: t('expenses'), icon: TrendingDown },
+    { id: 'savings', label: t('savings'), icon: PiggyBank },
+    { id: 'stats', label: t('stats'), icon: BarChart3 },
+    { id: 'family', label: t('family'), icon: Users },
   ];
 
   return (
@@ -44,9 +46,12 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       </nav>
       
       <div className="sidebar-footer">
-        <button className="nav-item">
+        <button 
+          className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`}
+          onClick={() => setActiveTab('settings')}
+        >
           <Settings size={20} />
-          <span>Settings</span>
+          <span>{t('settings')}</span>
         </button>
       </div>
     </div>

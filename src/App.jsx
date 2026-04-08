@@ -8,11 +8,14 @@ import SavingsView from './components/dashboard/SavingsView'
 import StatsView from './components/dashboard/StatsView'
 import FixedExpensesView from './components/dashboard/FixedExpensesView'
 import FamilyView from './components/dashboard/FamilyView'
+import SettingsView from './components/dashboard/SettingsView'
+import { useBudget } from './context/BudgetContext'
 import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { t } = useBudget()
 
   return (
     <div className="app-container">
@@ -26,14 +29,14 @@ function App() {
             <div className="fade-in">
               <div className="content-header">
                 <div>
-                  <h1>Welcome back, Team!</h1>
-                  <p style={{ color: 'var(--text-muted)' }}>Here's what's happening with your family budget today.</p>
+                  <h1>{t('welcome')}</h1>
+                  <p style={{ color: 'var(--text-muted)' }}>{t('subtitle')}</p>
                 </div>
                 <button 
                   className="btn btn-primary"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  Add Transaction
+                  {t('addTransaction')}
                 </button>
               </div>
               <DashboardOverview />
@@ -51,6 +54,10 @@ function App() {
 
           {activeTab === 'family' && (
             <FamilyView />
+          )}
+
+          {activeTab === 'settings' && (
+            <SettingsView />
           )}
 
           {(activeTab === 'income' || activeTab === 'expenses') && (

@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown, PiggyBank, ArrowUpRight, ArrowDownRight, Filt
 import { motion, AnimatePresence } from 'framer-motion';
 
 const TransactionList = () => {
-  const { transactions, members } = useBudget();
+  const { transactions, members, t } = useBudget();
   const [filterMember, setFilterMember] = useState('All');
   const [sortBy, setSortBy] = useState('date');
 
@@ -34,38 +34,38 @@ const TransactionList = () => {
     >
       <div className="list-header">
         <div className="header-left">
-          <h2>Recent Transactions</h2>
+          <h2>{t('recentTransactions')}</h2>
         </div>
         <div className="list-filters">
           <div className="filter-item">
             <Filter size={16} />
             <select value={filterMember} onChange={(e) => setFilterMember(e.target.value)}>
-              <option value="All">All Members</option>
+              <option value="All">{t('allMembers')}</option>
               {members.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-            <option value="date">Sort by Date</option>
-            <option value="amount">Sort by Amount</option>
+            <option value="date">{t('sortByDate')}</option>
+            <option value="amount">{t('sortByAmount')}</option>
           </select>
         </div>
       </div>
       
       <div className="transaction-table">
         <div className="table-row table-head">
-          <span>Transaction</span>
-          <span>Member</span>
-          <span>Category</span>
-          <span>Date</span>
-          <span className="text-right">Amount</span>
+          <span>{t('income')} / {t('expenses')}</span>
+          <span>{t('member')}</span>
+          <span>{t('category')}</span>
+          <span>{t('date')}</span>
+          <span className="text-right">{t('amount')}</span>
         </div>
         
         <AnimatePresence mode="popLayout">
-          {filteredTransactions.map(t => {
-            const { icon: Icon, color, bg } = getIcon(t.type);
+          {filteredTransactions.map(tr => {
+            const { icon: Icon, color, bg } = getIcon(tr.type);
             return (
               <motion.div 
-                key={t.id} 
+                key={tr.id} 
                 className="table-row"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -77,18 +77,18 @@ const TransactionList = () => {
                     <Icon size={18} style={{ color }} />
                   </div>
                   <div className="name-wrapper">
-                    <span className="transaction-name">{t.category}</span>
-                    <span className="transaction-type">{t.isFixed ? 'Fixed' : 'Variable'}</span>
+                    <span className="transaction-name">{t(tr.category.toLowerCase())}</span>
+                    <span className="transaction-type">{tr.isFixed ? t('fixed') : t('variable')}</span>
                   </div>
                 </div>
                 
                 <div className="member-badge">
-                  <div className="member-avatar">{t.member[0]}</div>
-                  <span>{t.member}</span>
+                  <div className="member-avatar">{tr.member[0]}</div>
+                  <span>{tr.member}</span>
                 </div>
                 
-                <span className="category-text">{t.category}</span>
-                <span className="date-text">{t.date}</span>
+                <span className="category-text">{t(tr.category.toLowerCase())}</span>
+                <span className="date-text">{tr.date}</span>
                 
                 <div className={`amount-text text-right ${t.type === 'income' ? 'income' : t.type === 'savings' ? 'savings' : 'expense'}`}>
                   {t.type === 'income' ? '+' : '-'}{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(t.amount)}

@@ -4,14 +4,14 @@ import StatCard from './StatCard';
 import { Wallet, TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
 
 const DashboardOverview = () => {
-  const { getStats, savingsBalance } = useBudget();
+  const { getStats, savingsBalance, t } = useBudget();
   const { totalIncome, totalExpenses, balance } = getStats();
 
   const stats = [
-    { title: 'Total Balance', amount: balance, icon: Wallet, color: 'primary', trend: 12 },
-    { title: 'Monthly Income', amount: totalIncome, icon: TrendingUp, color: 'success', trend: 8 },
-    { title: 'Monthly Expenses', amount: totalExpenses, icon: TrendingDown, color: 'danger', trend: -5 },
-    { title: 'Savings Account', amount: savingsBalance, icon: PiggyBank, color: 'info', trend: 15 },
+    { title: t('totalBalance'), amount: balance, icon: Wallet, color: 'primary', trend: 12 },
+    { title: t('monthlyIncome'), amount: totalIncome, icon: TrendingUp, color: 'success', trend: 8 },
+    { title: t('monthlyExpenses'), amount: totalExpenses, icon: TrendingDown, color: 'danger', trend: -5 },
+    { title: t('savingsAccount'), amount: savingsBalance, icon: PiggyBank, color: 'info', trend: 15 },
   ];
 
   return (

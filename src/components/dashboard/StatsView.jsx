@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 
 const StatsView = () => {
-  const { transactions, members } = useBudget();
+  const { transactions, members, t } = useBudget();
 
   // Data for member spending
   const memberSpending = members.map(member => ({
@@ -22,12 +22,12 @@ const StatsView = () => {
   // Data for category breakdown
   const categoryData = transactions
     .filter(t => t.type === 'expense')
-    .reduce((acc, t) => {
-      const existing = acc.find(item => item.name === t.category);
+    .reduce((acc, tr) => {
+      const existing = acc.find(item => item.name === tr.category);
       if (existing) {
-        existing.value += t.amount;
+        existing.value += tr.amount;
       } else {
-        acc.push({ name: t.category, value: t.amount });
+        acc.push({ name: t(tr.category.toLowerCase()) || tr.category, value: tr.amount });
       }
       return acc;
     }, []);
@@ -38,14 +38,14 @@ const StatsView = () => {
     <div className="stats-view fade-in">
       <div className="content-header">
         <div>
-          <h1>Family Analytics</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Analyze spending patterns across the family.</p>
+          <h1>{t('familyAnalytics')}</h1>
+          <p style={{ color: 'var(--text-muted)' }}>{t('analyzeSpending')}</p>
         </div>
       </div>
 
       <div className="stats-grid">
         <div className="chart-container glass-morphism">
-          <h3>Spending & Saving by Member</h3>
+          <h3>{t('spendingSaving')}</h3>
           <div style={{ height: 300, width: '100%' }}>
             <ResponsiveContainer>
               <BarChart data={memberSpending}>

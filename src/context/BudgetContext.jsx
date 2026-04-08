@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { translations } from '../utils/translations';
 
 const BudgetContext = createContext();
 
 export const useBudget = () => useContext(BudgetContext);
 
 export const BudgetProvider = ({ children }) => {
-  const [members] = useState(['Antoni', 'Anna', 'Marek', 'Zosia']);
+  const [members, setMembers] = useState(['Antoni', 'Anna', 'Marek', 'Zosia']);
+  const [language, setLanguage] = useState('pl'); // Default to Polish as requested
   const [savingsBalance, setSavingsBalance] = useState(2500);
   const [transactions, setTransactions] = useState([
     { id: 1, type: 'income', amount: 5000, category: 'Salary', member: 'Marek', date: '2026-04-01', isFixed: true },
@@ -42,13 +44,39 @@ export const BudgetProvider = ({ children }) => {
     return { totalIncome, totalExpenses, balance: totalIncome - totalExpenses };
   };
 
+  const t = (key) => {
+    return translations[language][key] || key;
+  };
+
+  const addMember = (name) => {
+    if (!members.includes(name)) {
+      setMembers([...members, name]);
+    }
+  };
+
+  const removeMember = (name) => {
+    setMembers(members.filter(m => m !== name));
+  };
+
+  const updateMember = (oldName, newName) => {
+    setMembers(members.map(m => m === oldName ? newName : m));
+    // Also update transactions
+    setTransactions(transactions.map(t => t.member === oldName ? {...t, member: newName} : t));
+  };
+
   return (
     <BudgetContext.Provider value={{ 
       transactions, 
       members, 
       savingsBalance, 
+      language,
+      setLanguage,
       addTransaction,
-      getStats 
+      getStats,
+      t,
+      addMember,
+      removeMember,
+      updateMember
     }}>
       {children}
     </BudgetContext.Provider>

@@ -3,7 +3,7 @@ import { useBudget } from '../../context/BudgetContext';
 import { X, Plus, PiggyBank, TrendingUp, TrendingDown } from 'lucide-react';
 
 const TransactionForm = ({ isOpen, onClose }) => {
-  const { members, addTransaction } = useBudget();
+  const { members, addTransaction, t } = useBudget();
   const [formData, setFormData] = useState({
     amount: '',
     category: '',
@@ -20,7 +20,7 @@ const TransactionForm = ({ isOpen, onClose }) => {
       ...formData,
       amount: parseFloat(formData.amount)
     });
-    setFormData({ amount: '', category: '', member: members[0], type: 'expense', isFixed: false });
+    setFormData({ amount: '', category: '', member: members[0] || '', type: 'expense', isFixed: false });
     onClose();
   };
 
@@ -28,13 +28,13 @@ const TransactionForm = ({ isOpen, onClose }) => {
     <div className="modal-overlay">
       <div className="modal-content glass-morphism fade-in">
         <div className="modal-header">
-          <h2>Add Transaction</h2>
+          <h2>{t('addTransaction')}</h2>
           <button className="close-btn" onClick={onClose}><X size={20} /></button>
         </div>
         
         <form onSubmit={handleSubmit} className="transaction-form">
           <div className="form-group">
-            <label>Amount (PLN)</label>
+            <label>{t('amount')} (PLN)</label>
             <input 
               type="number" 
               required 
@@ -45,7 +45,7 @@ const TransactionForm = ({ isOpen, onClose }) => {
           </div>
           
           <div className="form-group">
-            <label>Category</label>
+            <label>{t('category')}</label>
             <input 
               type="text" 
               required 
@@ -56,7 +56,7 @@ const TransactionForm = ({ isOpen, onClose }) => {
           </div>
           
           <div className="form-group">
-            <label>Family Member</label>
+            <label>{t('member')}</label>
             <select 
               value={formData.member}
               onChange={(e) => setFormData({...formData, member: e.target.value})}
@@ -71,21 +71,21 @@ const TransactionForm = ({ isOpen, onClose }) => {
               className={`type-btn ${formData.type === 'income' ? 'active income' : ''}`}
               onClick={() => setFormData({...formData, type: 'income'})}
             >
-              <TrendingUp size={18} /> Income
+              <TrendingUp size={18} /> {t('income')}
             </button>
             <button 
               type="button" 
               className={`type-btn ${formData.type === 'expense' ? 'active expense' : ''}`}
               onClick={() => setFormData({...formData, type: 'expense'})}
             >
-              <TrendingDown size={18} /> Expense
+              <TrendingDown size={18} /> {t('expenses')}
             </button>
             <button 
               type="button" 
               className={`type-btn ${formData.type === 'savings' ? 'active savings' : ''}`}
               onClick={() => setFormData({...formData, type: 'savings'})}
             >
-              <PiggyBank size={18} /> Savings
+              <PiggyBank size={18} /> {t('savings')}
             </button>
           </div>
           
@@ -96,11 +96,11 @@ const TransactionForm = ({ isOpen, onClose }) => {
               checked={formData.isFixed}
               onChange={(e) => setFormData({...formData, isFixed: e.target.checked})}
             />
-            <label htmlFor="isFixed">Fixed (Recurring) Transaction</label>
+            <label htmlFor="isFixed">{t('fixed')} ({t('addRecurring')})</label>
           </div>
           
           <button type="submit" className="btn btn-primary submit-btn">
-            Add Transaction <Plus size={18} />
+            {t('addTransaction')} <Plus size={18} />
           </button>
         </form>
       </div>
