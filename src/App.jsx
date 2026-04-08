@@ -5,6 +5,7 @@ import DashboardOverview from './components/dashboard/DashboardOverview'
 import TransactionList from './components/dashboard/TransactionList'
 import TransactionForm from './components/dashboard/TransactionForm'
 import SavingsView from './components/dashboard/SavingsView'
+import StatsView from './components/dashboard/StatsView'
 import './App.css'
 
 function App() {
@@ -40,6 +41,10 @@ function App() {
 
           {activeTab === 'savings' && (
             <SavingsView />
+          )}
+
+          {activeTab === 'stats' && (
+            <StatsView />
           )}
           
           {/* Other tabs will be implemented in subsequent commits */}
