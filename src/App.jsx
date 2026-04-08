@@ -6,6 +6,7 @@ import TransactionList from './components/dashboard/TransactionList'
 import TransactionForm from './components/dashboard/TransactionForm'
 import SavingsView from './components/dashboard/SavingsView'
 import StatsView from './components/dashboard/StatsView'
+import FixedExpensesView from './components/dashboard/FixedExpensesView'
 import './App.css'
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
 
           {activeTab === 'stats' && (
             <StatsView />
+          )}
+
+          {(activeTab === 'income' || activeTab === 'expenses') && (
+            <FixedExpensesView />
           )}
           
           {/* Other tabs will be implemented in subsequent commits */}

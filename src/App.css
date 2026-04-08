@@ -571,3 +571,81 @@
   font-weight: 600;
   color: var(--text-main);
 }
+
+.fixed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.fixed-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.fixed-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fixed-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.type-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.type-tag.expense { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+.type-tag.income { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+
+.fixed-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.fixed-card-footer {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.add-card {
+  border: 2px dashed var(--glass-border);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  background: transparent;
+}
+
+.add-card:hover {
+  border-color: var(--primary);
+  background: var(--glass);
+}
