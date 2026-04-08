@@ -675,3 +675,88 @@
   border-color: var(--primary);
   background: var(--glass);
 }
+
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.member-card {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.member-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.member-avatar-large {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.member-status {
+  font-size: 0.8rem;
+  color: var(--success);
+}
+
+.member-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.member-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.contribution-bar {
+  height: 8px;
+  background: var(--glass-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--success);
+}
+
+.bar-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.success-text { color: var(--success); }
+.danger-text { color: var(--danger); }
+.info-text { color: var(--info); }
