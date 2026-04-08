@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useBudget } from '../../context/BudgetContext';
-import { TrendingUp, TrendingDown, PiggyBank, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { TrendingUp, TrendingDown, PiggyBank, ArrowUpRight, ArrowDownRight, Filter } from 'lucide-react';
 
 const TransactionList = () => {
-  const { transactions } = useBudget();
+  const { transactions, members } = useBudget();
+  const [filterMember, setFilterMember] = useState('All');
+  const [sortBy, setSortBy] = useState('date');
+
+  const filteredTransactions = transactions
+    .filter(t => filterMember === 'All' || t.member === filterMember)
+    .sort((a, b) => {
+      if (sortBy === 'date') return new Date(b.date) - new Date(a.date);
+      if (sortBy === 'amount') return b.amount - a.amount;
+      return 0;
+    });
 
   const getIcon = (type) => {
     switch(type) {
@@ -17,8 +27,22 @@ const TransactionList = () => {
   return (
     <div className="transaction-list-container glass-morphism fade-in">
       <div className="list-header">
-        <h2>Recent Transactions</h2>
-        <button className="text-btn">View All</button>
+        <div className="header-left">
+          <h2>Recent Transactions</h2>
+        </div>
+        <div className="list-filters">
+          <div className="filter-item">
+            <Filter size={16} />
+            <select value={filterMember} onChange={(e) => setFilterMember(e.target.value)}>
+              <option value="All">All Members</option>
+              {members.map(m => <option key={m} value={m}>{m}</option>)}
+            </select>
+          </div>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <option value="date">Sort by Date</option>
+            <option value="amount">Sort by Amount</option>
+          </select>
+        </div>
       </div>
       
       <div className="transaction-table">
@@ -30,7 +54,7 @@ const TransactionList = () => {
           <span className="text-right">Amount</span>
         </div>
         
-        {transactions.map(t => {
+        {filteredTransactions.map(t => {
           const { icon: Icon, color, bg } = getIcon(t.type);
           return (
             <div key={t.id} className="table-row">

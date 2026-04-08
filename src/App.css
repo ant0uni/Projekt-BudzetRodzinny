@@ -238,6 +238,32 @@
   margin-bottom: 1.5rem;
 }
 
+.list-filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass);
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+}
+
+.list-filters select {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+
 .text-btn {
   background: transparent;
   border: none;
