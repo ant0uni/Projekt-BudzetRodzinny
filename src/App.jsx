@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
+import DashboardOverview from './components/dashboard/DashboardOverview'
 import './App.css'
 
 function App() {
@@ -16,8 +17,14 @@ function App() {
         <div className="content-area">
           {activeTab === 'dashboard' && (
             <div className="fade-in">
-              <h1>Welcome back, Team!</h1>
-              <p style={{ color: 'var(--text-muted)' }}>Here's what's happening with your family budget today.</p>
+              <div className="content-header">
+                <div>
+                  <h1>Welcome back, Team!</h1>
+                  <p style={{ color: 'var(--text-muted)' }}>Here's what's happening with your family budget today.</p>
+                </div>
+                <button className="btn btn-primary">Download Report</button>
+              </div>
+              <DashboardOverview />
             </div>
           )}
           {/* Other tabs will be implemented in subsequent commits */}
