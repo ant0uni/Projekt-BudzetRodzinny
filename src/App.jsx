@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
 import DashboardOverview from './components/dashboard/DashboardOverview'
+import TransactionList from './components/dashboard/TransactionList'
 import './App.css'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 <button className="btn btn-primary">Download Report</button>
               </div>
               <DashboardOverview />
+              <TransactionList />
             </div>
           )}
           {/* Other tabs will be implemented in subsequent commits */}
