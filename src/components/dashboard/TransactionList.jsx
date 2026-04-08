@@ -90,9 +90,9 @@ const TransactionList = () => {
                 <span className="category-text">{t(tr.category.toLowerCase())}</span>
                 <span className="date-text">{tr.date}</span>
                 
-                <div className={`amount-text text-right ${t.type === 'income' ? 'income' : t.type === 'savings' ? 'savings' : 'expense'}`}>
-                  {t.type === 'income' ? '+' : '-'}{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(t.amount)}
-                  {t.type === 'income' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
+                <div className={`amount-text text-right ${tr.type === 'income' ? 'income' : tr.type === 'savings' ? 'savings' : 'expense'}`}>
+                  {tr.type === 'income' ? '+' : '-'}{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(tr.amount || 0)}
+                  {tr.type === 'income' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
                 </div>
               </motion.div>
             );

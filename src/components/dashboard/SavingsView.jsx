@@ -54,17 +54,17 @@ const SavingsView = () => {
       <div className="transaction-list-container glass-morphism" style={{ marginTop: '2rem' }}>
         <h2>Savings History</h2>
         <div className="transaction-table">
-          {savingsTransactions.length > 0 ? savingsTransactions.map(t => (
-            <div key={t.id} className="table-row">
+          {savingsTransactions.length > 0 ? savingsTransactions.map(item => (
+            <div key={item.id} className="table-row">
               <div className="transaction-info">
                 <div className="icon-circle" style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}>
                   <PiggyBank size={18} style={{ color: 'var(--info)' }} />
                 </div>
-                <span>{t.category || 'Savings Deposit'}</span>
+                <span>{item.category || 'Savings Deposit'}</span>
               </div>
-              <span>{t.member}</span>
-              <span>{t.date}</span>
-              <span className="amount-text savings">+{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(t.amount)}</span>
+              <span>{item.member}</span>
+              <span>{item.date}</span>
+              <span className="amount-text savings">+{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(item.amount || 0)}</span>
             </div>
           )) : (
             <div className="empty-state">No savings transactions yet.</div>

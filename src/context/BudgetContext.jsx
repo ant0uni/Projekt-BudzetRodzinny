@@ -45,7 +45,10 @@ export const BudgetProvider = ({ children }) => {
   };
 
   const t = (key) => {
-    return translations[language][key] || key;
+    if (!key) return '';
+    const safeKey = String(key).toLowerCase();
+    const langData = translations[language] || translations['pl'];
+    return langData[safeKey] || langData[key] || key;
   };
 
   const addMember = (name) => {
