@@ -760,3 +760,66 @@
 .success-text { color: var(--success); }
 .danger-text { color: var(--danger); }
 .info-text { color: var(--info); }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    padding: 1rem;
+  }
+  
+  .sidebar-logo {
+    padding-bottom: 1rem;
+  }
+  
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .nav-item {
+    white-space: nowrap;
+    width: auto;
+  }
+  
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .search-bar {
+    width: 100%;
+  }
+  
+  .large-amount {
+    font-size: 2.5rem;
+  }
+  
+  .banner-illustration {
+    display: none;
+  }
+  
+  .table-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .table-head {
+    display: none;
+  }
+  
+  .category-text, .date-text {
+    display: none;
+  }
+}
