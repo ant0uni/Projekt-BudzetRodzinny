@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useBudget } from '../../context/BudgetContext';
 import { TrendingUp, TrendingDown, PiggyBank, ArrowUpRight, ArrowDownRight, Filter } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const TransactionList = () => {
   const { transactions, members } = useBudget();
@@ -25,7 +26,12 @@ const TransactionList = () => {
   };
 
   return (
-    <div className="transaction-list-container glass-morphism fade-in">
+    <motion.div 
+      className="transaction-list-container glass-morphism"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="list-header">
         <div className="header-left">
           <h2>Recent Transactions</h2>
@@ -54,37 +60,46 @@ const TransactionList = () => {
           <span className="text-right">Amount</span>
         </div>
         
-        {filteredTransactions.map(t => {
-          const { icon: Icon, color, bg } = getIcon(t.type);
-          return (
-            <div key={t.id} className="table-row">
-              <div className="transaction-info">
-                <div className="icon-circle" style={{ backgroundColor: bg }}>
-                  <Icon size={18} style={{ color }} />
+        <AnimatePresence mode="popLayout">
+          {filteredTransactions.map(t => {
+            const { icon: Icon, color, bg } = getIcon(t.type);
+            return (
+              <motion.div 
+                key={t.id} 
+                className="table-row"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                layout
+              >
+                <div className="transaction-info">
+                  <div className="icon-circle" style={{ backgroundColor: bg }}>
+                    <Icon size={18} style={{ color }} />
+                  </div>
+                  <div className="name-wrapper">
+                    <span className="transaction-name">{t.category}</span>
+                    <span className="transaction-type">{t.isFixed ? 'Fixed' : 'Variable'}</span>
+                  </div>
                 </div>
-                <div className="name-wrapper">
-                  <span className="transaction-name">{t.category}</span>
-                  <span className="transaction-type">{t.isFixed ? 'Fixed' : 'Variable'}</span>
+                
+                <div className="member-badge">
+                  <div className="member-avatar">{t.member[0]}</div>
+                  <span>{t.member}</span>
                 </div>
-              </div>
-              
-              <div className="member-badge">
-                <div className="member-avatar">{t.member[0]}</div>
-                <span>{t.member}</span>
-              </div>
-              
-              <span className="category-text">{t.category}</span>
-              <span className="date-text">{t.date}</span>
-              
-              <div className={`amount-text text-right ${t.type === 'income' ? 'income' : t.type === 'savings' ? 'savings' : 'expense'}`}>
-                {t.type === 'income' ? '+' : '-'}{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(t.amount)}
-                {t.type === 'income' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-              </div>
-            </div>
-          );
-        })}
+                
+                <span className="category-text">{t.category}</span>
+                <span className="date-text">{t.date}</span>
+                
+                <div className={`amount-text text-right ${t.type === 'income' ? 'income' : t.type === 'savings' ? 'savings' : 'expense'}`}>
+                  {t.type === 'income' ? '+' : '-'}{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(t.amount)}
+                  {t.type === 'income' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
