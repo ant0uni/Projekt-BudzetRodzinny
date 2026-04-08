@@ -1,16 +1,40 @@
-# React + Vite
+# 🏠 FamBudget - Family Finance Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FamBudget is a modern, premium React application designed to help families manage their shared budget with style. Built with glassmorphism aesthetics and smooth animations, it provides a clear overview of income, expenses, and savings.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **📊 Dashboard Overview**: Real-time balance, income, expense, and savings tracking.
+- **🔄 Mixed Transaction Types**: Manage income, variable expenses, and fixed monthly commitments.
+- **👨‍👩‍👧‍👦 Family Attribution**: Every transaction is assigned to a specific family member.
+- **📈 Advanced Analytics**: Visual charts (powered by Recharts) showing spending patterns and contribution ratios.
+- **💰 Savings Goal Tracker**: Dedicated view for savings with progress bars and history.
+- **📱 Responsive Design**: Optimized for both desktop and mobile devices.
+- **✨ Premium UI**: Modern glassmorphism design with Framer Motion animations.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+- **Styling**: Vanilla CSS (Premium Custom Design System)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Charts**: [Recharts](https://recharts.org/)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 📝 Project Rules (Implementation Plan)
+
+This project was built following a structured 15-commit workflow to ensure incremental feature implementation and stability.
+
+---
+Built with ❤️ for family financial harmony.
