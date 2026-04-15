@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
+import { useBudget } from '../../context/BudgetContext';
 
 const Header = () => {
   const { t } = useBudget();

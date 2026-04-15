@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useBudget } from './context/BudgetContext'
 import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
 import DashboardOverview from './components/dashboard/DashboardOverview'
@@ -9,13 +10,16 @@ import StatsView from './components/dashboard/StatsView'
 import FixedExpensesView from './components/dashboard/FixedExpensesView'
 import FamilyView from './components/dashboard/FamilyView'
 import SettingsView from './components/dashboard/SettingsView'
-import { useBudget } from './context/BudgetContext'
 import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { t } = useBudget()
+  const budget = useBudget()
+  
+  if (!budget) return <div style={{ color: 'white', padding: '100px', textAlign: 'center' }}><h1>Budget Context not found!</h1></div>
+  
+  const { t } = budget
 
   return (
     <div className="app-container">
@@ -63,8 +67,6 @@ function App() {
           {(activeTab === 'income' || activeTab === 'expenses') && (
             <FixedExpensesView />
           )}
-          
-          {/* Default view */}
         </div>
       </main>
 
