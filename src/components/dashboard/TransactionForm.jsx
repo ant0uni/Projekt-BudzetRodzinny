@@ -3,7 +3,7 @@ import { useBudget } from '../../context/BudgetContext';
 import { X, Plus, PiggyBank, TrendingUp, TrendingDown } from 'lucide-react';
 
 const TransactionForm = ({ isOpen, onClose }) => {
-  const { members, addTransaction, t } = useBudget();
+  const { members, addTransaction, t, modalDefaults, setModalDefaults } = useBudget();
   const [formData, setFormData] = useState({
     amount: '',
     category: '',
@@ -11,6 +11,15 @@ const TransactionForm = ({ isOpen, onClose }) => {
     type: 'expense',
     isFixed: false
   });
+
+  React.useEffect(() => {
+    if (isOpen && modalDefaults) {
+      setFormData(prev => ({
+        ...prev,
+        ...modalDefaults
+      }));
+    }
+  }, [isOpen, modalDefaults]);
 
   if (!isOpen) return null;
 
@@ -21,6 +30,13 @@ const TransactionForm = ({ isOpen, onClose }) => {
       amount: parseFloat(formData.amount)
     });
     setFormData({ amount: '', category: '', member: members[0] || '', type: 'expense', isFixed: false });
+    setModalDefaults(null);
+    onClose();
+  };
+
+  const handleClose = () => {
+    setFormData({ amount: '', category: '', member: members[0] || '', type: 'expense', isFixed: false });
+    setModalDefaults(null);
     onClose();
   };
 
@@ -29,7 +45,7 @@ const TransactionForm = ({ isOpen, onClose }) => {
       <div className="modal-content glass-morphism fade-in">
         <div className="modal-header">
           <h2>{t('addTransaction')}</h2>
-          <button className="close-btn" onClick={onClose}><X size={20} /></button>
+          <button className="close-btn" onClick={handleClose}><X size={20} /></button>
         </div>
         
         <form onSubmit={handleSubmit} className="transaction-form">

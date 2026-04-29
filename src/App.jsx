@@ -14,12 +14,11 @@ import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const budget = useBudget()
   
   if (!budget) return <div style={{ color: 'white', padding: '100px', textAlign: 'center' }}><h1>Budget Context not found!</h1></div>
   
-  const { t } = budget
+  const { t, isModalOpen, setIsModalOpen } = budget
 
   return (
     <div className="app-container">
@@ -65,7 +64,7 @@ function App() {
           )}
 
           {(activeTab === 'income' || activeTab === 'expenses') && (
-            <FixedExpensesView />
+            <FixedExpensesView type={activeTab} />
           )}
         </div>
       </main>

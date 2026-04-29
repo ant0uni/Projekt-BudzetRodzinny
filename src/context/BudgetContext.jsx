@@ -9,6 +9,8 @@ export const BudgetProvider = ({ children }) => {
   const [members, setMembers] = useState(['Antoni', 'Anna', 'Marek', 'Zosia']);
   const [language, setLanguage] = useState('pl'); // Default to Polish as requested
   const [savingsBalance, setSavingsBalance] = useState(2500);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalDefaults, setModalDefaults] = useState(null);
   const [transactions, setTransactions] = useState([
     { id: 1, type: 'income', amount: 5000, category: 'Salary', member: 'Marek', date: '2026-04-01', isFixed: true },
     { id: 2, type: 'income', amount: 3500, category: 'Salary', member: 'Anna', date: '2026-04-02', isFixed: true },
@@ -79,7 +81,11 @@ export const BudgetProvider = ({ children }) => {
       t,
       addMember,
       removeMember,
-      updateMember
+      updateMember,
+      isModalOpen,
+      setIsModalOpen,
+      modalDefaults,
+      setModalDefaults
     }}>
       {children}
     </BudgetContext.Provider>

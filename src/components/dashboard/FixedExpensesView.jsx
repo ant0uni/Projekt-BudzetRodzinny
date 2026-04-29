@@ -2,16 +2,20 @@ import React from 'react';
 import { useBudget } from '../../context/BudgetContext';
 import { RefreshCw, Calendar, ArrowRight, User } from 'lucide-react';
 
-const FixedExpensesView = () => {
-  const { transactions, t } = useBudget();
-  const fixedItems = transactions.filter(t => t.isFixed);
+const FixedExpensesView = ({ type = 'expenses' }) => {
+  const { transactions, t, setIsModalOpen, setModalDefaults } = useBudget();
+  const isIncome = type === 'income';
+  const filterType = isIncome ? 'income' : 'expense';
+  const fixedItems = transactions.filter(item => item.isFixed && item.type === filterType);
 
   return (
     <div className="fixed-expenses-view fade-in">
       <div className="content-header">
         <div>
-          <h1>{t('fixedExpenses')}</h1>
-          <p style={{ color: 'var(--text-muted)' }}>{t('recurringSubtitle')}</p>
+          <h1>{isIncome ? t('fixedIncomes') : t('fixedExpenses')}</h1>
+          <p style={{ color: 'var(--text-muted)' }}>
+            {isIncome ? t('recurringSubtitleIncome') : t('recurringSubtitle')}
+          </p>
         </div>
       </div>
 
@@ -43,12 +47,19 @@ const FixedExpensesView = () => {
           </div>
         ))}
         
-        <div className="fixed-card add-card glass-morphism">
+        <div 
+          className="fixed-card add-card glass-morphism" 
+          onClick={() => {
+            setModalDefaults({ type: filterType, isFixed: true });
+            setIsModalOpen(true);
+          }}
+          style={{ cursor: 'pointer' }}
+        >
           <div className="add-icon">
             <RefreshCw size={32} />
           </div>
-          <h3>Add Recurring</h3>
-          <p>Setup new monthly bill</p>
+          <h3>{t('addRecurring')}</h3>
+          <p>{isIncome ? t('setupMonthlyIncome') : t('setupMonthly')}</p>
         </div>
       </div>
     </div>
